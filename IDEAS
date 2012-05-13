@@ -1,0 +1,7 @@
+hex based
+damage = attack*amount - defense*amount
+AP for attacks and movement
+
+three types of modes - furious ( -50% defense, +50 AP) normal and defense ( +50 defense, -50% AP )
+can store AP for attack response
+map size between heroes and panzer
