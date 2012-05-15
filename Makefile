@@ -1,9 +1,10 @@
 OBJF = src/basic2d.o\
+       src/terrain.o\
        src/program.o
 LIBS=clanApp clanDisplay clanCore clanSWRender clanGL clanGL1
 PACKAGES = $(patsubst %,%-2.3,$(LIBS))
 # CXXFLAGS += `pkg-config --cflags $(PACKAGES)` -mthreads
-CXXFLAGS += `pkg-config --cflags $(PACKAGES)` -pthread
+CXXFLAGS += `pkg-config --cflags $(PACKAGES)` -pthread -Wall
 BIN=game-project
 
 all: $(BIN)
