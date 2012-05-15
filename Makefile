@@ -1,4 +1,5 @@
-OBJF = src/basic2d.o src/precomp.o src/program.o
+OBJF = src/basic2d.o\
+       src/program.o
 LIBS=clanApp clanDisplay clanCore clanSWRender clanGL clanGL1
 PACKAGES = $(patsubst %,%-2.3,$(LIBS))
 # CXXFLAGS += `pkg-config --cflags $(PACKAGES)` -mthreads

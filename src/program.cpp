@@ -27,7 +27,8 @@
 **    Mark Page
 */
 
-#include "precomp.h"
+#include <ClanLib/application.h>
+
 #include "program.h"
 #include "basic2d.h"
 

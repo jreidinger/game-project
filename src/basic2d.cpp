@@ -27,7 +27,6 @@
 **    Mark Page
 */
 
-#include "precomp.h"
 #include "basic2d.h"
 
 // The start of the Application
@@ -53,7 +52,7 @@ int Basic2D::start(const std::vector<CL_String> &args)
 	CL_GraphicContext gc = window.get_gc();
 
 	// Load a sprite from a png-file
-	CL_Sprite spr_logo(gc, "res/logo.png");
+	CL_Sprite spr_logo(gc, "res/terrain.png");
 
 	float sin_count = 0.0f;
 	float ypos = 0.0f;

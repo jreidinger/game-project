@@ -28,6 +28,9 @@
 */
 
 #pragma once
+#include <vector>
+#include <ClanLib/core.h>
+
 
 // This is the Program class that is called by CL_ClanApplication
 class Program

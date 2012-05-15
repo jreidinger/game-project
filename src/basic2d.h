@@ -28,6 +28,10 @@
 */
 
 #pragma once
+#include <vector>
+#include <ClanLib/core.h>
+#include <ClanLib/display.h>
+
 
 // This is the Application class (That is instantiated by the Program Class)
 class Basic2D
