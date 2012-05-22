@@ -12,7 +12,7 @@ void Terrain::update(long ms)
 
 void Terrain::render(CL_GraphicContext gc,CL_Size offset)
 {
-  int position_x = location.x/2*(size.width+edge_length)+location.x%2*size.width-offset.width;
+  int position_x = location.x/2*(size.width+edge_length)+(location.x%2)*((size.width-edge_length)/2+edge_length)-offset.width;
   int position_y = location.y*size.height+location.x%2*size.height/2-offset.height;
   sprite.draw(gc, position_x, position_y);
 }

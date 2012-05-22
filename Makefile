@@ -1,5 +1,6 @@
 OBJF = src/basic2d.o\
        src/terrain.o\
+       src/battle_map.o\
        src/program.o
 LIBS=clanApp clanDisplay clanCore clanSWRender clanGL clanGL1
 PACKAGES = $(patsubst %,%-2.3,$(LIBS))

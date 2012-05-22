@@ -28,6 +28,7 @@
 */
 
 #include "basic2d.h"
+#include "battle_map.h"
 
 // The start of the Application
 int Basic2D::start(const std::vector<CL_String> &args)
@@ -51,75 +52,23 @@ int Basic2D::start(const std::vector<CL_String> &args)
 	// Get the graphic context
 	CL_GraphicContext gc = window.get_gc();
 
-	// Load a sprite from a png-file
-	CL_Sprite spr_logo(gc, "res/terrain.png");
-
-	float sin_count = 0.0f;
-	float ypos = 0.0f;
-	float ydir = 0.3f;
 
 	unsigned int last_time = CL_System::get_time();
+  BattleMap battle_map(gc);
 
 	// Run until someone presses escape
 	while (!quit)
 	{
 		unsigned int current_time = CL_System::get_time();
-		float time_delta_ms = static_cast<float> (current_time - last_time);
+		unsigned time_delta_ms = current_time - last_time;
 		last_time = current_time;
 
+    battle_map.update(time_delta_ms);
 		// Clear the display in a dark blue nuance
 		// The four arguments are red, green, blue and alpha
-		gc.clear(CL_Colorf(0.0f,0.0f,0.2f));
+		gc.clear(CL_Colorf(0.0f,0.0f,0.0f));
 
-		// Move the lines
-		ypos += ydir * time_delta_ms;
-		if (ydir > 0.0f)
-		{
-			if ((ypos+200.0f) >= gc.get_height())
-			{
-				ypos = (float) (gc.get_height() - 200);
-				ydir *= -1.0f;
-			}
-		}
-		else
-		{
-			if (ypos <= 0.0f)
-			{
-				ypos = 0.0f;
-				ydir *= -1.0f;
-			}
-		}
-			
-		CL_Draw::line(gc, 0, ypos-1.0f, (float) gc.get_width(), ypos-1.0f,CL_Colorf(0.5f, 0.0f, 0.0f));
-		CL_Draw::line(gc, 0, ypos+198.0f, (float) gc.get_width(), ypos+198.0f, CL_Colorf(0.5f, 0.0f, 0.0f));
-
-		// Show the logo image.
-		// Use the get_width() and get_height() functions of both
-		// CL_DisplayWindow and CL_Sprite, to show the image in the bottom right corner
-		spr_logo.draw(gc, 
-			(float) gc.get_width()-spr_logo.get_width(),
-			(float) gc.get_height()-spr_logo.get_height());
-
-		gc.push_cliprect(CL_Rect(0, (int)(ypos), gc.get_width(), (int)(ypos+198)));
-
-		// Draw a rectangle in the center of the screen
-		// going from (240, 140) -> (440, 340) _not_ including the 
-		// pixels in the right-most column and bottom-most row (440, 340)
-		CL_Draw::fill(gc, CL_Rectf(240.0f, 140.0f, 440.0f, 340.0f), CL_Colorf(1.0f, 1.0f, 1.0f));
-
-		// Frame the rectangle with red lines
-		CL_Draw::box(gc, 240.0f, 140.0f, 440.0f, 340.0f, CL_Colorf(1.0f, 0.0f, 0.0f));
-
-		// Show a few alpha-blending moving rectangles that moves in circles
-		float x = cos(sin_count)*120.0f;
-		float y = sin(sin_count)*120.0f;
-		sin_count += 0.004f * time_delta_ms;
-		CL_Draw::fill(gc, CL_Rectf( 320.0f + x -30.0f, 240.0f + y -30.0f, CL_Sizef(30.0f, 30.0f)), CL_Colorf(0.0f, 1.0f, 0.0, 0.5f));
-		x = cos(sin_count+3.14159f)*120.0f;
-		y = sin(sin_count+3.14159f)*120.0f;
-		CL_Draw::fill(gc, CL_Rectf( 320.0f + x -30.0f, 240 + y -30.0f, CL_Sizef(30.0f, 30.0f)), CL_Colorf(1.0f, 1.0f, 0.0, 0.5f));
-
-		gc.pop_cliprect();
+    battle_map.render(gc);
 
 		// Flip the display, showing on the screen what we have drawed
 		// since last call to flip()
